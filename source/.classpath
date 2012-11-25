@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="var" path="JRE_LIB"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/sqlite-jdbc-3.7.2.jar"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/swingx-all-1.6.3.jar"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/jfreechart-1.0.14.jar"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/synthetica.jar"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/syntheticaAluOxide.jar"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/syntheticaBlackEye.jar"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/syntheticaWhiteVision.jar"/>
+	<classpathentry kind="lib" path="Recursos/Bibliotecas/WebLookAndFeel_1_3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
