@@ -12,7 +12,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -30,7 +29,7 @@ import com.sige.gui.votacao.MenuVotacao;
  * @author Charles Garrocho
  * @author Barbara Silveiro
  */
-public class JanelaPrincipal extends JFrame {
+public class JanelaPrincipal extends Janela {
 
 	private static final long serialVersionUID = 1L;
 	private JMenuBar barraMenu;
