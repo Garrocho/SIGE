@@ -2,16 +2,17 @@ package com.sige.gui.candidato.eventos;
 
 import static com.sige.recursos.Recurso.copy;
 import static com.sige.recursos.Recurso.extensao;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showConfirmDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import com.sige.gui.candidato.DialogoCadastrarCandidato;
+import com.sige.gui.recursos.DialogoErro;
+import com.sige.gui.recursos.DialogoSucesso;
 import com.sige.persistencia.BancoDadosCandidato;
 import com.sige.persistencia.BancoDadosCargo;
 import com.sige.persistencia.BancoDadosPartido;
@@ -78,20 +79,20 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 	
 				// Verifica se os campos estao preenchidos corretamente.
 				if (nome.equals(""))
-					showMessageDialog(gui, "Forneca o nome do candidato", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca o nome do candidato");
 				else if (nome.length() < 10)
-					showMessageDialog(gui, "Especifique melhor o nome do candidato", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Especifique melhor o nome do candidato");
 				else if (numero.length() == 0)
-					showMessageDialog(gui, "O Numero do Partido Nao Pode Ficar Vazio", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "O Numero do Partido Nao Pode Ficar Vazio");
 				else if (!numeroPartido.equalsIgnoreCase(numero.substring(0, 2))) {
-					showMessageDialog(gui, "O Numero Do Partido Deve Comecar Com " + numeroPartido, "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "O Numero Do Partido Deve Comecar Com " + numeroPartido);
 					gui.getFieldNumero().setText(numeroPartido);
 				}
 				else if (!numeroDigitos.equalsIgnoreCase(String.format("%d",numero.length()))) {
-					showMessageDialog(gui, "O Numero do " + cargo + " Deve Ter " + numeroDigitos + " Digitos." , "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "O Numero do " + cargo + " Deve Ter " + numeroDigitos + " Digitos.");
 				}
 				else if (caminhoImagem.equalsIgnoreCase("Recursos/Imagens/Default/cadastro.png"))
-					showMessageDialog(gui, "Selecione uma Imagem Para o Candidato", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Selecione uma Imagem Para o Candidato");
 				else {
 	
 					// Verifica se o caminho da imagem e diferente do cadastrado anteriormente.
@@ -102,7 +103,7 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 						try {
 							copy(file, dest);
 						} catch (IOException e) {
-							showMessageDialog(gui, "Selecione uma Imagem Para o Candidato", "Atencao", INFORMATION_MESSAGE);
+							new DialogoErro(gui, "Erro", "Selecione uma Imagem Para o Candidato");
 						}
 					}
 	
@@ -112,15 +113,15 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 							int verifica = dataBaseCandidato.verificaCandidato(Integer.parseInt(numero));
 							if (verifica == 0) {
 								dataBaseCandidato.adicionarCandidato(Integer.parseInt(numero), nome, partido, cargo, caminhoImagem);
-								showMessageDialog(gui, "Candidato Cadastro.", "Sucesso", INFORMATION_MESSAGE);
+								new DialogoSucesso(gui, "Sucesso", "Candidato Cadastrado.");
 								gui.dispose();
 							}
 							else
-								showMessageDialog(gui, "Ja Existe Um Candidato Com Esse Numero.", "Atencao", INFORMATION_MESSAGE);
+								new DialogoErro(gui, "Erro", "Ja Existe Um Candidato Com Esse Numero.");
 							dataBaseCandidato.fechaConexao();
 							
 						} catch (Exception e) {
-							showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+							new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 						}
 					}
 					else {
@@ -134,18 +135,18 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 	
 								if (gui.getNumeroAlterar() == Integer.parseInt(numero)) {
 									dataBaseCandidato.alterarCandidato(Integer.parseInt(numero), nome, partido, cargo, caminhoImagem);
-									showMessageDialog(gui, "Candidato Alterado.", "Sucesso", INFORMATION_MESSAGE);
+									new DialogoSucesso(gui, "Sucesso", "Candidato Alterado.");
 									gui.dispose();
 								}
 								else {
 									verifica = dataBaseCandidato.verificaCandidatoPorCargo(Integer.parseInt(numero), cargo);
 									if (verifica == 0) {
 										dataBaseCandidato.alterarCandidatoNovoNumero(gui.getNumeroAlterar(), Integer.parseInt(numero), nome, partido, cargo, caminhoImagem);
-										showMessageDialog(gui, "Candidato Alterado.", "Sucesso", INFORMATION_MESSAGE);
+										new DialogoSucesso(gui, "Sucesso", "Candidato Alterado.");
 										gui.dispose();
 									}
 									else
-										showMessageDialog(gui, "Ja Existe Um Candidato Com Esses Dados Cadastrados.", "Atencao", INFORMATION_MESSAGE);	
+										new DialogoErro(gui, "Erro",  "Ja Existe Um Candidato Com Esses Dados Cadastrados.");
 									dataBaseCandidato.fechaConexao();
 								}
 							}
@@ -160,24 +161,24 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 	
 										if (gui.getNumeroAlterar() == Integer.parseInt(numero)) {
 											dataBaseCandidato.alterarCandidatoCargo(gui.getCargoAlterar(), Integer.parseInt(numero), nome, partido, cargo, caminhoImagem);
-											showMessageDialog(gui, "Candidato Alterado.", "Sucesso", INFORMATION_MESSAGE);
+											new DialogoSucesso(gui, "Sucesso", "Candidato Alterado.");
 											gui.dispose();
 										}
 										else {
 											dataBaseCandidato.alterarCandidatoNovoNumeroCargo(gui.getCargoAlterar(), gui.getNumeroAlterar(), Integer.parseInt(numero), nome, partido, cargo, caminhoImagem);
-											showMessageDialog(gui, "Candidato Alterado.", "Sucesso", INFORMATION_MESSAGE);
+											new DialogoSucesso(gui, "Sucesso", "Candidato Alterado.");
 											gui.dispose();
 										}
 									}
 									else
-										showMessageDialog(gui, "Ja Existe Um Candidato Com Esses Dados Cadastrados.", "Atencao", INFORMATION_MESSAGE);	
+										new DialogoErro(gui, "Erro",  "Ja Existe Um Candidato Com Esses Dados Cadastrados.");
 									dataBaseCandidato.fechaConexao();
 								} catch (Exception e) {
-									showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+									new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista:\n" + e.toString());
 								}
 							}
 						} catch (Exception e) {
-							showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+							new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista:\n" + e.toString());
 						}
 					}
 				}
@@ -198,7 +199,7 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 			numeroPartido = String.format("%d",dataBasePartido.verificaPartidoSigla(sigla));
 			dataBasePartido.fechaConexao();
 		} catch (Exception e) {
-			showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista:\n" + e.toString());
 		}
 		return numeroPartido;
 	}
@@ -213,7 +214,7 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 	private void excluiDados(String numero, String nome, String cargo) {
 
 		// Exibe uma mensagem ao usuario perguntando se ele gostaria de excluir o candidato.
-		int op = showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
+		int op = JOptionPane.showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
 		if (op == 0) {
 			try {
 				System.out.println("teste");
@@ -224,7 +225,7 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 				dataBaseCandidato.excluirCandidato(Integer.parseInt(numero),nome);
 				dataBaseCandidato.fechaConexao();
 			} catch (Exception e) {
-				showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista:\n" + e.toString());
 			}
 		}
 	}
@@ -242,7 +243,7 @@ public class TratadorEventosCadastroCandidato implements ActionListener {
 			numeroDigitos = String.format("%d",dataBaseCargo.obterDigitosCargo(cargo));
 			dataBaseCargo.fechaConexao();
 		} catch (Exception e) {
-			showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista:\n" + e.toString());
 		}
 		return numeroDigitos;
 	}
