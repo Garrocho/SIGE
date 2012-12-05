@@ -89,7 +89,6 @@ public class DialogoUrnaEletronica extends JDialog {
 			
 			addWindowListener( new WindowAdapter() {
 				public void windowClosing(WindowEvent arg0) {
-					UIManager.put("Synthetica.window.decoration", Boolean.FALSE);
 					try {
 						UIManager.setLookAndFeel(new SyntheticaWhiteVisionLookAndFeel());
 					} catch (Exception e) {
