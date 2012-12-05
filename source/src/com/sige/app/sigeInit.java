@@ -26,7 +26,6 @@ public class sigeInit {
 	public static void main(String args[]) {
 
 		// Inicializa o banco de dados e verifica de o banco existe.
-		UIManager.put("Synthetica.window.decoration", Boolean.FALSE);
 		try {
 			UIManager.setLookAndFeel(new SyntheticaWhiteVisionLookAndFeel());
 			java.io.File IMAGENS;
