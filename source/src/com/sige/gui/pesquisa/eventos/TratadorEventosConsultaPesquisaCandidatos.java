@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.pesquisa.DialogoConsultarPesquisa;
 import com.sige.persistencia.BancoDadosPesquisaCandidatos;
 
@@ -53,6 +54,7 @@ public class TratadorEventosConsultaPesquisaCandidatos extends MouseAdapter {
 	 */
 	public void mouseClicked(MouseEvent evento) {
 		JDialog popMenu = new JDialog(gui,"Candidatos Relacionados a Pesquisa");
+		popMenu.getRootPane().setBorder(new ShadowBorder());
 		
 		JPanel painelCentro = new JPanel();
 		String colunasTabelaCandidato[] = {"Nome","Votos"},
