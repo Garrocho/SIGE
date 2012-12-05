@@ -20,6 +20,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.alee.extended.date.WebDateField;
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.lookup.LookUpCandidato;
 import com.sige.gui.lookup.LookUpCargo;
 import com.sige.gui.pesquisa.eventos.TratadorEventosCadastroPesquisa;
@@ -47,6 +48,7 @@ public class DialogoCadastrarPesquisa extends JDialog {
 	public DialogoCadastrarPesquisa() {
 
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 		setTitle("Cadastro de Pesquisa Eleitoral");
 		TratadorEventosCadastroPesquisa tratadorEventos = new TratadorEventosCadastroPesquisa(this);
 

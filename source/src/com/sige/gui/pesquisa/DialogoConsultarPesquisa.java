@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.pesquisa.eventos.TratadorEventosConsultaPesquisaCandidatos;
 import com.sige.persistencia.BancoDadosPesquisa;
 
@@ -37,6 +38,7 @@ public class DialogoConsultarPesquisa extends JDialog {
 	public DialogoConsultarPesquisa() {
 
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 		setTitle("Pesquisas Eleitorais Cadastradas");
 
 		JPanel painelCentro = new JPanel();

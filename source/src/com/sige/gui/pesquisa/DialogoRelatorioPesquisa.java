@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import com.alee.extended.date.WebDateField;
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.lookup.LookUpCargo;
 import com.sige.gui.pesquisa.eventos.TratadorEventosRelatorioPesquisa;
 
@@ -40,6 +41,7 @@ public class DialogoRelatorioPesquisa extends JDialog {
 	public DialogoRelatorioPesquisa() {
 		
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 		setTitle("Relatorio de Pesquisa Eleitoral");
 		
 		TratadorEventosRelatorioPesquisa tratadorEventos = new TratadorEventosRelatorioPesquisa(this);

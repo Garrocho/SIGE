@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import com.alee.extended.date.WebDateField;
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.lookup.LookUpCargo;
 import com.sige.gui.votacao.eventos.TratadorEventosCadastrarVotacao;
 
@@ -46,6 +47,7 @@ public class DialogoCadastrarVotocao extends JDialog {
 	public DialogoCadastrarVotocao() {
 		
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 		setTitle("Cadastro de Votacao");
 		TratadorEventosCadastrarVotacao tratadorEventos = new TratadorEventosCadastrarVotacao(this);
 		

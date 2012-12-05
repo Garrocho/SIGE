@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.partido.eventos.TratadorEventosCadastroPartido;
 import com.sige.gui.recursos.SomenteNumeros;
 import com.sige.gui.recursos.TamanhoMaximo;
@@ -41,6 +42,7 @@ public class DialogoCadastrarPartido extends JDialog {
 	 * @param sigla
 	 */
 	public DialogoCadastrarPartido(int numero, String nome, String sigla) {
+		getRootPane().setBorder(new ShadowBorder());
 		TratadorEventosCadastroPartido tratadorEvento = new TratadorEventosCadastroPartido(this);
 
 		// Verifica se o numero e igual a "-1", se sim define o titulo como Cadastro, se nao define como alteracao.

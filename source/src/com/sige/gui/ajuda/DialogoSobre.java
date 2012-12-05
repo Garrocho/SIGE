@@ -13,6 +13,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+import com.sige.gui.ShadowBorder;
+
 /**
  * Esta classe extende um <code>JDialog</code> e cria uma interface grafica com as informacoes do software e equipe.
  * 
@@ -30,6 +32,7 @@ public class DialogoSobre extends JDialog {
 		
 		super();
 		setTitle("Sobre o SIGE");
+		getRootPane().setBorder(new ShadowBorder());
 		
 		// Cria um painel de abas. 
 		JTabbedPane tabbedPane = new JTabbedPane();

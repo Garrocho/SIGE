@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.cargo.eventos.TratadorEventosConsultaCargo;
 
 /**
@@ -45,6 +46,7 @@ public class DialogoConsultarCargo extends JDialog {
 	public DialogoConsultarCargo(int opcao, String titulo) {
 
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 		setTitle(titulo);
 		this.opcao = opcao;
 		TratadorEventosConsultaCargo tratadorEventos = new TratadorEventosConsultaCargo(this);

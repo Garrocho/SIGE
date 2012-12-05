@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.lookup.eventos.TratadorEventosLookUpPartido;
 
 /**
@@ -33,6 +34,7 @@ public class LookUpPartido extends JDialog {
 	public LookUpPartido(JDialog dialogo, JTextField partido) {
 
 		super(dialogo, "Consulta de Partido");
+		getRootPane().setBorder(new ShadowBorder());
 		this.partido = partido;
 		TratadorEventosLookUpPartido tratadorEventos = new TratadorEventosLookUpPartido(this);
 

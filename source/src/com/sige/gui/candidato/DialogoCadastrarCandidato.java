@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.candidato.eventos.TratadorEventosCadastroCandidato;
 import com.sige.gui.lookup.LookUpCargo;
 import com.sige.gui.lookup.LookUpPartido;
@@ -57,6 +58,7 @@ public class DialogoCadastrarCandidato extends JDialog {
 	 */
 	public DialogoCadastrarCandidato(String numero, String nome, String partido, String cargo, String caminhoFoto) {
 
+		getRootPane().setBorder(new ShadowBorder());
 		TratadorEventosCadastroCandidato tratadorEventos = new TratadorEventosCadastroCandidato(this);
 		NumeroAlterar = Integer.parseInt(numero);
 		cargoAlterar = cargo;

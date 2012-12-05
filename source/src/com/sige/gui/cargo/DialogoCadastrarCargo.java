@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.cargo.eventos.TratadorEventosCadastroCargo;
 import com.sige.gui.recursos.SomenteNumeros;
 import com.sige.gui.recursos.TamanhoMaximo;
@@ -39,6 +40,7 @@ public class DialogoCadastrarCargo extends JDialog {
 	public DialogoCadastrarCargo(int id, String nome, String digitos) {
 		
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 		TratadorEventosCadastroCargo tratadorEvento = new TratadorEventosCadastroCargo(this, id);
 
 		JPanel painelNorte = new JPanel();

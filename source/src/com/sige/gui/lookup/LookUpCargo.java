@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.lookup.eventos.TratadorEventosLookUpCargo;
 
 /**
@@ -35,6 +36,7 @@ public class LookUpCargo extends JDialog {
 	public LookUpCargo(JDialog dialogo, Component cargoAux) {
 
 		super(dialogo, "Consulta de Cargo");
+		getRootPane().setBorder(new ShadowBorder());
 		TratadorEventosLookUpCargo tratadorEventos = new TratadorEventosLookUpCargo(this);
 
 		this.cargoAux = cargoAux;

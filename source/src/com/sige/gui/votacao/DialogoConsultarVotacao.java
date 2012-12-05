@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.votacao.eventos.TratadorEventosConsultaVotacao;
 
 /**
@@ -38,6 +39,7 @@ public class DialogoConsultarVotacao extends JDialog {
 	public DialogoConsultarVotacao() {
 
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 		setTitle("Consultar Votacao");
 		TratadorEventosConsultaVotacao tratadorEventos = new TratadorEventosConsultaVotacao(this);
 

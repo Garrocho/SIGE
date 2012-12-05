@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.lookup.eventos.TratadorEventosLookUpCandidato;
 import com.sige.gui.recursos.SomenteNumeros;
 import com.sige.gui.recursos.TamanhoMaximo;
@@ -36,6 +37,7 @@ public class LookUpCandidato extends JDialog {
 	public LookUpCandidato(JDialog dialogo, JTable tabelaCandidato, String cargo) {
 
 		super(dialogo, "Consulta de Candidato");
+		getRootPane().setBorder(new ShadowBorder());
 		this.cargo = cargo;
 		this.tabelaCandidato = tabelaCandidato;
 		TratadorEventosLookUpCandidato tratadorEventos = new TratadorEventosLookUpCandidato(this);

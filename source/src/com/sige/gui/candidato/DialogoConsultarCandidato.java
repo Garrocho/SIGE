@@ -18,6 +18,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.sige.gui.JanelaPrincipal;
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.candidato.eventos.TratadorEventosConsultaCandidato;
 import com.sige.gui.recursos.SomenteNumeros;
 import com.sige.gui.recursos.TamanhoMaximo;
@@ -44,6 +45,7 @@ public class DialogoConsultarCandidato extends JDialog {
 	public DialogoConsultarCandidato(JanelaPrincipal janelaPrincipal) {
 
 		super(janelaPrincipal, "Listagem de Candidatos");
+		getRootPane().setBorder(new ShadowBorder());
 		TratadorEventosConsultaCandidato tratadorEventos = new TratadorEventosConsultaCandidato(this);
 
 		JPanel painelNorte = new JPanel();

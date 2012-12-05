@@ -26,11 +26,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.votacao.eventos.TratadorEventosUrnaEletronica;
 import com.sige.persistencia.BancoDadosVotacao;
 import com.sige.persistencia.BancoDadosVotacaoCargos;
+import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import de.javasoft.plaf.synthetica.SyntheticaWhiteVisionLookAndFeel;
 
@@ -75,6 +76,7 @@ public class DialogoUrnaEletronica extends JDialog {
 	public DialogoUrnaEletronica () {
 
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 
 		// Caso a hora esteja no horario correto da votacao o Dialogo da Urna eletronica e criado.
 		if ( verificaVotacao() != -1) {

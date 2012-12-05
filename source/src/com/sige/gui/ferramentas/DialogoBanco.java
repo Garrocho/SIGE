@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.gui.ferramentas.eventos.TratadorEventosBancoDados;
 
 /**
@@ -33,6 +34,7 @@ public class DialogoBanco extends JDialog {
 	public DialogoBanco() {
 
 		super();
+		getRootPane().setBorder(new ShadowBorder());
 		setTitle("Banco de Dados");
 		TratadorEventosBancoDados tratadorEventos = new TratadorEventosBancoDados(this);
 
