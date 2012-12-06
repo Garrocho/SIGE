@@ -1,9 +1,5 @@
 package com.sige.gui.lookup.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showInputDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -12,9 +8,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import com.sige.gui.lookup.LookUpCandidato;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.persistencia.BancoDadosCandidato;
 
 /**
@@ -22,7 +20,6 @@ import com.sige.persistencia.BancoDadosCandidato;
  * classe <code>LookUpCandidato</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see LookUpCandidato
  */
@@ -104,7 +101,7 @@ public class TratadorEventosLookUpCandidato extends KeyAdapter implements Action
 			}
 			dataBaseCandidato.fechaConexao();
 		} catch (Exception e) {
-			showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
 	}
 
@@ -128,7 +125,7 @@ public class TratadorEventosLookUpCandidato extends KeyAdapter implements Action
 		if (verificaCandidato(numero))
 			achou = true;
 		while (achou == true) {
-			votos = showInputDialog(gui,"Quantidade de Votos");
+			votos = JOptionPane.showInputDialog(gui,"Quantidade de Votos");
 			if (votos != null) {
 				if (votos.matches("[0-9]+") && votos.length() < 10) {
 					Object[] linha = new Object[3];

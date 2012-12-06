@@ -1,8 +1,5 @@
 package com.sige.gui.cargo.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -15,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.sige.gui.cargo.DialogoCadastrarCargo;
 import com.sige.gui.cargo.DialogoConsultarCargo;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.persistencia.BancoDadosCargo;
 
 /**
@@ -22,7 +20,6 @@ import com.sige.persistencia.BancoDadosCargo;
  * classe <code>DialogoConsultarCargo</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see DialogoConsultarCargo
  */
@@ -135,7 +132,7 @@ public class TratadorEventosConsultaCargo extends KeyAdapter implements ActionLi
 				}
 				dataBaseCargo.fechaConexao();
 			} catch (Exception e) {
-				showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 			}
 		}
 	}

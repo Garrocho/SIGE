@@ -1,9 +1,5 @@
 package com.sige.gui.votacao.eventos;
 
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Color;
@@ -20,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.gui.votacao.DialogoUrnaEletronica;
 import com.sige.persistencia.BancoDadosCandidato;
 import com.sige.persistencia.BancoDadosPartido;
@@ -80,7 +77,7 @@ public class TratadorEventosUrnaEletronica implements ActionListener {
 				somCliqueConfirma = Applet.newAudioClip(new URL(FIM));
 			somCliqueConfirma.play();
 		} catch (Exception e) {
-			showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "ERROR", ERROR_MESSAGE);
+			new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}  
 	}
 
@@ -180,7 +177,7 @@ public class TratadorEventosUrnaEletronica implements ActionListener {
 							corrigeTela();
 						}
 					} catch (Exception e) {
-						showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+						new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 					}
 				}
 
@@ -385,7 +382,7 @@ public class TratadorEventosUrnaEletronica implements ActionListener {
 			}
 
 		} catch (Exception e) {
-			showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
 	}
 
@@ -429,7 +426,7 @@ public class TratadorEventosUrnaEletronica implements ActionListener {
 			else
 				dataBaseCandidato.fechaConexao();
 		} catch (Exception e) {
-			showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
 	}
 }

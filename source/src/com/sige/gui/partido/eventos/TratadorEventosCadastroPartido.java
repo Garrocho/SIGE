@@ -1,13 +1,13 @@
 package com.sige.gui.partido.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showConfirmDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import com.sige.gui.partido.DialogoCadastrarPartido;
+import com.sige.gui.recursos.DialogoErro;
+import com.sige.gui.recursos.DialogoSucesso;
 import com.sige.persistencia.BancoDadosPartido;
 
 /**
@@ -15,7 +15,6 @@ import com.sige.persistencia.BancoDadosPartido;
  * <code>DialogoCadastrarPartido</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see DialogoCadastrarPartido
  */
@@ -54,10 +53,10 @@ public class TratadorEventosCadastroPartido implements ActionListener {
 
 			// Verifica os dados do novo partido.
 			if (nome.length() <= 5) {
-				showMessageDialog(gui, "Especifique Melhor o Nome do Partido.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Especifique Melhor o Nome do Partido.");
 			}
 			else if (sigla.length() <= 1) {
-				showMessageDialog(gui, "Especifique Melhor a Sigla.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Especifique Melhor a Sigla.");
 			}
 			else {
 				try {
@@ -67,15 +66,15 @@ public class TratadorEventosCadastroPartido implements ActionListener {
 					/* Verifica se nao existe um cargo com o mesmo numero. Se nao os dados sao gravados, caso contrario uma mensagem 
 					 * de erro e exibida na tela informando o usuario que ja existe um partido cadastrado com o mesmo numero. */
 					if (verifica != 0)
-						showMessageDialog(gui, "Ja Existe Um Partido Com Esse Nome.", "Atencao", INFORMATION_MESSAGE);
+						new DialogoErro(gui, "Erro", "Ja Existe Um Partido Com Esse Nome.");
 					else {
 						dataBasePartido.adicionarPartido(Integer.parseInt(numero), nome, sigla);
-						showMessageDialog(gui, "Partido Adicionado.", "Sucesso", INFORMATION_MESSAGE);
+						new DialogoSucesso(gui, "Sucesso", "Partido Adicionado.");
 						gui.dispose();
 					}
 					dataBasePartido.fechaConexao();
 				} catch (Exception e) {
-					showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 				}
 			}
 		}
@@ -93,10 +92,10 @@ public class TratadorEventosCadastroPartido implements ActionListener {
 
 			// Verifica os dados do novo partido.
 			if (nome.length() <= 5) {
-				showMessageDialog(gui, "Especifique Melhor o Nome do Partido.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Especifique Melhor o Nome do Partido.");
 			}
 			else if (sigla.length() <= 1) {
-				showMessageDialog(gui, "Especifique Melhor a Sigla.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Especifique Melhor a Sigla Partido.");
 			}
 			else {
 				try {
@@ -104,21 +103,21 @@ public class TratadorEventosCadastroPartido implements ActionListener {
 					if (id != Integer.parseInt(numero)) {
 						int verifica = dataBasePartido.verificaPartido(Integer.parseInt(numero));
 						if (verifica != 0)
-							showMessageDialog(gui, "Ja Existe Um Partido Com Esse Nome.", "Atencao", INFORMATION_MESSAGE);
+							new DialogoErro(gui, "Erro", "Ja Existe Um Partido Com Esse Nome.");
 						else {
 							dataBasePartido.alterarPartido(id,Integer.parseInt(numero), nome, sigla);
-							showMessageDialog(gui, "Partido Alterado.", "Sucesso", INFORMATION_MESSAGE);
+							new DialogoSucesso(gui, "Sucesso", "Partido Alterado.");
 							gui.dispose();
 						}
 					}
 					else {
 						dataBasePartido.alterarPartido(id,Integer.parseInt(numero), nome, sigla);
-						showMessageDialog(gui, "Partido Alterado.", "Sucesso", INFORMATION_MESSAGE);
+						new DialogoSucesso(gui, "Sucesso", "Partido Alterado.");
 						gui.dispose();
 					}
 					dataBasePartido.fechaConexao();
 				} catch (Exception e) {
-					showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 				}	
 			}
 		}
@@ -130,14 +129,14 @@ public class TratadorEventosCadastroPartido implements ActionListener {
 		else if ( evento.getSource() == gui.getBotaoExcluir()) {
 			// Obtem os dados do partido.
 			String nome = gui.getFieldNome().getText();
-			int op = showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
+			int op = JOptionPane.showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
 			if (op == 0) {
 				try {
 					dataBasePartido.iniciaConexao();
 					dataBasePartido.excluirPartido(gui.getOpcao());
 					dataBasePartido.fechaConexao();			
 				} catch (Exception e1) {
-					showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e1.toString(), "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e1.toString());
 				}
 			}
 			gui.dispose();

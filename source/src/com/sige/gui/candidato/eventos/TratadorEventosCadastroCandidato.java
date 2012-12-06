@@ -22,7 +22,6 @@ import com.sige.persistencia.BancoDadosPartido;
  * <code>DialogoCadastrarCandidato</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see DialogoCadastrarCandidato
  */

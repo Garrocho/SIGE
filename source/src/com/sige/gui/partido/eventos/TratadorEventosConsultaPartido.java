@@ -1,8 +1,5 @@
 package com.sige.gui.partido.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -15,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.sige.gui.partido.DialogoCadastrarPartido;
 import com.sige.gui.partido.DialogoConsultarPartido;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.persistencia.BancoDadosPartido;
 
 /**
@@ -22,7 +20,6 @@ import com.sige.persistencia.BancoDadosPartido;
  * classe <code>DialogoConsultarPartido</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see DialogoConsultarPartido
  */
@@ -134,7 +131,7 @@ public class TratadorEventosConsultaPartido extends KeyAdapter implements Action
 					dataBasePartido.fechaConexao();
 				}
 			} catch (Exception e) {
-				showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 			}
 		}
 	}

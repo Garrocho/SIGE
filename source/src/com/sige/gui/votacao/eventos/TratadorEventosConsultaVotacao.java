@@ -1,8 +1,5 @@
 package com.sige.gui.votacao.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -14,6 +11,7 @@ import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
 import com.sige.graficos.GraficoBarra;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.gui.votacao.DialogoConsultarVotacao;
 import com.sige.persistencia.BancoDadosVotacaoCargos;
 
@@ -89,7 +87,7 @@ public class TratadorEventosConsultaVotacao extends KeyAdapter implements Action
 				}
 				dataBaseVotacaoCargos.fechaConexao();
 			} catch (Exception e) {
-				showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 			}
 		}
 	}
@@ -109,7 +107,7 @@ public class TratadorEventosConsultaVotacao extends KeyAdapter implements Action
 			new GraficoBarra(data, cargo, dataBaseVotacaoCargos.obterQuantidadeEleitores(cargo, data));
 			dataBaseVotacaoCargos.fechaConexao();
 		} catch (Exception e1) {
-			showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e1.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e1.toString());
 		}
 	}
 

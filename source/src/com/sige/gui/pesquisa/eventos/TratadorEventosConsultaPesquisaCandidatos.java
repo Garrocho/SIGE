@@ -1,8 +1,5 @@
 package com.sige.gui.pesquisa.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,13 +14,13 @@ import javax.swing.table.DefaultTableModel;
 
 import com.sige.gui.ShadowBorder;
 import com.sige.gui.pesquisa.DialogoConsultarPesquisa;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.persistencia.BancoDadosPesquisaCandidatos;
 
 /**
  * Esta classe extende um <code>MouseAdapter</code> e trata os eventos da classe <code>DialogoConsultarPesquisa</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see DialogoConsultarPesquisa
  */
@@ -83,7 +80,7 @@ public class TratadorEventosConsultaPesquisaCandidatos extends MouseAdapter {
 			}
 			dataBasePesquisaCandidato.fechaConexao();
 		} catch (Exception e) {
-			showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
 		
 		JScrollPane barraRolagem2 = new JScrollPane(tabelaCandidatos);

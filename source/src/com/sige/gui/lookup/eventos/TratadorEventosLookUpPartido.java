@@ -1,8 +1,5 @@
 package com.sige.gui.lookup.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -14,6 +11,7 @@ import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
 import com.sige.gui.lookup.LookUpPartido;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.persistencia.BancoDadosCandidato;
 import com.sige.persistencia.BancoDadosPartido;
 
@@ -22,7 +20,6 @@ import com.sige.persistencia.BancoDadosPartido;
  * classe <code>LookUpPartido</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see LookUpPartido
  */
@@ -100,7 +97,7 @@ public class TratadorEventosLookUpPartido extends KeyAdapter implements ActionLi
 					dataBasePartido.fechaConexao();
 				}
 			} catch (Exception e) {
-				showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 			}
 		}
 	}

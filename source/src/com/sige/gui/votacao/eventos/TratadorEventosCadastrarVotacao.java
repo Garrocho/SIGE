@@ -1,18 +1,18 @@
 package com.sige.gui.votacao.eventos;
 
 import static com.sige.recursos.Recurso.formataData;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showConfirmDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.sige.gui.recursos.DialogoErro;
+import com.sige.gui.recursos.DialogoSucesso;
 import com.sige.gui.votacao.DialogoCadastrarVotocao;
 import com.sige.persistencia.BancoDadosCandidato;
 import com.sige.persistencia.BancoDadosVotacao;
@@ -74,16 +74,16 @@ public class TratadorEventosCadastrarVotacao extends MouseAdapter implements Act
 
 			// Verifica se os dados estao inseridos corretamente.
 			if (data.length() == 0) {
-				showMessageDialog(gui, "Forneca a Data da Votacao.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Forneca a Data da Votacao.");
 			}
 			else if (data.length() > 14 || data.length() < 10) {
-				showMessageDialog(gui, "Forneca uma Data Inicio Valida para a Votacao.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Forneca uma Data Inicio Valida para a Votacao.");
 			}
 			else if (horaInicio.substring(0, 1).equalsIgnoreCase(" ")) {
-				showMessageDialog(gui, "Forneca a Hora Inicio da Votacao.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Forneca a Hora Inicio da Votacao.");
 			}
 			else if (horaFim.substring(0, 1).equalsIgnoreCase(" ")) {
-				showMessageDialog(gui, "Forneca a Hora Fim da Votacao.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Forneca a Hora Fim da Votacao.");
 			}
 			else {
 
@@ -94,16 +94,16 @@ public class TratadorEventosCadastrarVotacao extends MouseAdapter implements Act
 				int auxHoraFim =  Integer.parseInt(horaFim);
 				
 				if (auxHoraInicio > 23) {
-					showMessageDialog(gui, "A Hora Inicio Nao Pode Ser Maior Que 23Hrs.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "A Hora Inicio Nao Pode Ser Maior Que 23Hrs.");
 				}
 				else if (auxHoraFim > 23) {
-					showMessageDialog(gui, "A Hora Fim Nao Pode Ser Maior Que 23Hrs.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "A Hora Fim Nao Pode Ser Maior Que 23Hrs.");
 				}
 				else if (auxHoraInicio > auxHoraFim) {
-					showMessageDialog(gui, "A Hora Inicio Nao Pode Ser Maior Que a Hora Fim.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "A Hora Inicio Nao Pode Ser Maior Que a Hora Fim.");
 				}
 				else if (modeloTabela.getRowCount() == 0) {
-					showMessageDialog(gui, "Forneca Um Cargo Para a Eleicao.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca Um Cargo Para a Eleicao.");
 				}
 				else {
 					try {
@@ -119,7 +119,7 @@ public class TratadorEventosCadastrarVotacao extends MouseAdapter implements Act
 							dataBaseCandidato.fechaConexao();
 						}
 						if ( !Error.equalsIgnoreCase("Nao Existe Candidatos Cadastrados Para os Seguintes Cargos:")) {
-							showMessageDialog(gui, Error, "Atencao", INFORMATION_MESSAGE);
+							new DialogoErro(gui, "Erro", Error);
 						}
 						else {
 
@@ -137,16 +137,16 @@ public class TratadorEventosCadastrarVotacao extends MouseAdapter implements Act
 											Integer.parseInt( modeloTabela.getValueAt(x,2).toString() ));
 								dataBaseVotacaoCargos.fechaConexao();
 
-								showMessageDialog(gui, "Votacao Cadastrada.", "Sucesso", INFORMATION_MESSAGE);
+								new DialogoSucesso(gui, "Sucesso", "Votacao Cadastrada.");
 								gui.dispose();
 							}
 							else {
-								showMessageDialog(gui, "Ja Existe Uma Votacao Cadastrada Nessa Data", "Atencao", INFORMATION_MESSAGE);
+								new DialogoErro(gui, "Erro", "Ja Existe Uma Votacao Cadastrada Nessa Data");
 								dataBaseVotacao.fechaConexao();
 							}
 						}
 					} catch (Exception e) {
-						showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+						new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 					}
 				}
 			}
@@ -180,7 +180,7 @@ public class TratadorEventosCadastrarVotacao extends MouseAdapter implements Act
 		int posicao = gui.getTabelaCargo().getSelectedRow();
 		String nome = gui.getTabelaCargo().getValueAt(posicao, 1).toString();
 
-		int op = showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
+		int op = JOptionPane.showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
 		if (op == 0) {
 			modeloTabela = ((DefaultTableModel)(gui.getTabelaCargo().getModel()));
 			modeloTabela.removeRow(posicao);

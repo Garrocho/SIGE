@@ -1,8 +1,5 @@
 package com.sige.gui.votacao;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -28,6 +25,7 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
 import com.sige.gui.ShadowBorder;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.gui.votacao.eventos.TratadorEventosUrnaEletronica;
 import com.sige.persistencia.BancoDadosVotacao;
 import com.sige.persistencia.BancoDadosVotacaoCargos;
@@ -39,7 +37,6 @@ import de.javasoft.plaf.synthetica.SyntheticaWhiteVisionLookAndFeel;
  * Esta classe extende um <code>JDialog</code> e cria uma interface grafica que permite o usuario votar em um candidato.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoUrnaEletronica extends JDialog {
 
@@ -92,7 +89,7 @@ public class DialogoUrnaEletronica extends JDialog {
 					try {
 						UIManager.setLookAndFeel(new SyntheticaWhiteVisionLookAndFeel());
 					} catch (Exception e) {
-						showMessageDialog(null, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+						new DialogoErro(null, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 					}
 				}
 			});
@@ -393,9 +390,8 @@ public class DialogoUrnaEletronica extends JDialog {
 			int verifica = dataBaseVotacao.verificaVotacaoPorData(dataAtual);
 
 			// Se nao existir uma votacao marcada para este dia, manda uma mensagem na tela informando o usuario.
-			if (verifica == 0) {
-				showMessageDialog(null, "Nao Existe Votacao Marcada Para Hoje", "Atencao", INFORMATION_MESSAGE);
-			}
+			if (verifica == 0)
+				new DialogoErro(null, "Erro", "Nao Existe Votacao Marcada Para Hoje.");
 
 			// Caso contrario, se existir uma votacao marcada para hoje, verifica a hora da votacao.
 			else {
@@ -414,11 +410,11 @@ public class DialogoUrnaEletronica extends JDialog {
 
 				// verifica se a hora atual e maior que a hora inicial e menor que a hora final que esta cadastrada no sistema.
 				if (horaAtual < horaInicio) {
-					showMessageDialog(null, "A Votacao Ira Comecar As " + horaInicio + "hs", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(null, "Erro", "A Votacao Ira Comecar As " + horaInicio + "hs");
 					return -1;
 				}
 				else if (horaAtual > horaFim) {
-					showMessageDialog(null, "A Votacao Ja Encerrou As " + horaFim + "hs", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(null, "Erro", "A Votacao Ja Encerrou As " + horaFim + "hs");
 					return -1;
 				}
 				else {
@@ -448,7 +444,7 @@ public class DialogoUrnaEletronica extends JDialog {
 			}
 			return -1;
 		} catch (Exception e) {
-			showMessageDialog(null, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(null, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
 		return -1;
 	}	

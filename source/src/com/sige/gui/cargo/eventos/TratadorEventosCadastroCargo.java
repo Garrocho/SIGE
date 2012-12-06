@@ -1,13 +1,13 @@
 package com.sige.gui.cargo.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showConfirmDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import com.sige.gui.cargo.DialogoCadastrarCargo;
+import com.sige.gui.recursos.DialogoErro;
+import com.sige.gui.recursos.DialogoSucesso;
 import com.sige.persistencia.BancoDadosCargo;
 
 /**
@@ -54,13 +54,13 @@ public class TratadorEventosCadastroCargo implements ActionListener {
 			
 			// Verifica os dados do novo cargo.
 			if (nome.length() <= 5) {
-				showMessageDialog(gui, "Especifique Melhor o Nome do Cargo.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Especifique Melhor o Nome do Cargo.");
 			}
 			else if (digitos.length() == 0) {
-				showMessageDialog(gui, "Defina a Quantidade de Digitos.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Defina a Quantidade de Digitos.");
 			}
 			else if (Integer.parseInt(digitos) == 0) {
-				showMessageDialog(gui, "Os Digitos Nao Poder Ser Zero.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Os Digitos Nao Poder Ser Zero.");
 			}
 			else {
 
@@ -70,15 +70,15 @@ public class TratadorEventosCadastroCargo implements ActionListener {
 					dataBaseCargo.iniciaConexao();
 					int verifica = dataBaseCargo.verificaCargo(nome);
 					if (verifica != 0)
-						showMessageDialog(gui, "Ja Existe Um Cargo Com Esse Nome.", "Atencao", INFORMATION_MESSAGE);
+						new DialogoErro(gui, "Erro", "Ja Existe Um Cargo Com Esse Nome.");
 					else {
 						dataBaseCargo.adicionarCargo(dataBaseCargo.quantidadeCargos()+1, nome, Integer.parseInt(digitos));
-						showMessageDialog(gui, "Cargo Adicionado.", "Sucesso", INFORMATION_MESSAGE);
+						new DialogoSucesso(gui, "Sucesso", "Cargo Adicionado");
 						gui.dispose();
 					}
 					dataBaseCargo.fechaConexao();
 				} catch (Exception e) {
-					showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 				}
 			}
 		}
@@ -97,23 +97,23 @@ public class TratadorEventosCadastroCargo implements ActionListener {
 			
 			// Verifica os dados do novo cargo.
 			if (nome.length() <= 5) {
-				showMessageDialog(gui, "Especifique Melhor o Nome do Cargo.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Especifique Melhor o Nome do Cargo.");
 			}
 			else if (digitos.length() == 0) {
-				showMessageDialog(gui, "Defina a Quantidade de Digitos.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Defina a Quantidade de Digitos.");
 			}
 			else if (Integer.parseInt(digitos) == 0) {
-				showMessageDialog(gui, "Os Digitos Nao Poder Ser Zero.", "Atencao", INFORMATION_MESSAGE);
+				new DialogoErro(gui, "Erro", "Os Digitos Nao Poder Ser Zero.");
 			}
 			else {
 				try {
 					dataBaseCargo.iniciaConexao();
 					dataBaseCargo.alterarCargo(id, nome, Integer.parseInt(digitos));
-					showMessageDialog(gui, "Cargo Alterado.", "Sucesso", INFORMATION_MESSAGE);
+					new DialogoSucesso(gui, "Sucesso", "Cargo Alterado.");
 					gui.dispose();
 					dataBaseCargo.fechaConexao();
 				} catch (Exception e) {
-					showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 				}	
 				gui.dispose();
 			}
@@ -122,7 +122,7 @@ public class TratadorEventosCadastroCargo implements ActionListener {
 		// Verifica se o evento ocorreu no botao Cancelar. Se sim da um dispose no dialogo e o dialogo e encerrado.
 		else if (evento.getSource() == gui.getBotaoExcluir()) {
 			String nome = gui.getFieldNome().getText();
-			int op = showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
+			int op = JOptionPane.showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
 			if (op == 0) {
 				try {
 					dataBaseCargo.iniciaConexao();
@@ -130,7 +130,7 @@ public class TratadorEventosCadastroCargo implements ActionListener {
 					dataBaseCargo.fechaConexao();
 					gui.dispose();
 				} catch (Exception e1) {
-					showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e1.toString(), "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e1.toString());
 				}
 			}
 		}

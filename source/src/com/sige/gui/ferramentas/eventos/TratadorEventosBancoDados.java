@@ -1,15 +1,13 @@
 package com.sige.gui.ferramentas.eventos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showConfirmDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 
 import com.sige.gui.cargo.DialogoCadastrarCargo;
 import com.sige.gui.ferramentas.DialogoBanco;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.persistencia.BancoDados;
 import com.sige.persistencia.BancoDadosCandidato;
 import com.sige.persistencia.BancoDadosCargo;
@@ -25,7 +23,6 @@ import com.sige.persistencia.BancoDadosVotacaoCargos;
  * <code>DialogoBanco</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see DialogoBanco
  */
@@ -96,7 +93,7 @@ public class TratadorEventosBancoDados implements ActionListener {
 			dataBaseCandidato.fechaConexao();
 
 		} catch (Exception e) {
-			showMessageDialog(null, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(dialogoBanco, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
 		return banco;
 	}
@@ -136,7 +133,7 @@ public class TratadorEventosBancoDados implements ActionListener {
 
 			// Verifica se existe dados nas tabelas do banco de dados.
 			if (banco > 0) 
-				op = showConfirmDialog(dialogoBanco, "O Banco Ja Esta Populado. Gostaria de Limpa-lo e Popula-lo?");
+				op = JOptionPane.showConfirmDialog(dialogoBanco, "O Banco Ja Esta Populado. Gostaria de Limpa-lo e Popula-lo?");
 
 			// Verifica se o usuario confirmou a exclusao dos dados.
 			if (op != 1) {
@@ -448,12 +445,8 @@ public class TratadorEventosBancoDados implements ActionListener {
 					Thread.sleep(5);
 					dataBaseVotacaoCandidatos.fechaConexao();
 
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				} catch (InterruptedException e) {
-					// TODO: handle exception
+				} catch (Exception e1) {
+					new DialogoErro(dialogoBanco, "Erro", "Informe o Seguinte Erro ao Analista: " + e1.toString());
 				}
 			}
 		}
@@ -462,7 +455,7 @@ public class TratadorEventosBancoDados implements ActionListener {
 		else if (evento.getSource() == dialogoBanco.getBotaoLimpar()) {
 			dialogoBanco.getBotaoLimpar().setEnabled(false);
 			dialogoBanco.getBotaoPopular().setEnabled(false);
-			op = showConfirmDialog(dialogoBanco, "Confirma a Limpeza do Banco?");
+			op = JOptionPane.showConfirmDialog(dialogoBanco, "Confirma a Limpeza do Banco?");
 
 			if (op != 1) {
 				dialogoBanco.getAreaInformacoes().append("Apagando os Dados\n");

@@ -1,20 +1,19 @@
 package com.sige.gui.pesquisa.eventos;
 
 import static com.sige.recursos.Recurso.formataData;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showConfirmDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.sige.gui.pesquisa.DialogoCadastrarPesquisa;
+import com.sige.gui.recursos.DialogoErro;
+import com.sige.gui.recursos.DialogoSucesso;
 import com.sige.persistencia.BancoDadosPesquisa;
 import com.sige.persistencia.BancoDadosPesquisaCandidatos;
 
@@ -23,7 +22,6 @@ import com.sige.persistencia.BancoDadosPesquisaCandidatos;
  * <code>DialogoCadastrarPesquisa</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see DialogoCadastrarPesquisa
  */
@@ -76,18 +74,14 @@ public class TratadorEventosCadastroPesquisa implements ActionListener, MouseLis
 			dataFim = dataFim.replace(".", "/");
 
 			// Verifica se os dados estao inseridos corretamente.
-			if (dataInicio.length() == 0) {
-				showMessageDialog(gui, "Forneca a Data Inicio da Pesquisa.", "Atencao", INFORMATION_MESSAGE);
-			}
-			else if (dataInicio.length() > 14 || dataInicio.length() < 10) {
-				showMessageDialog(gui, "Forneca uma Data Inicio Valida para a Pesquisa.", "Atencao", INFORMATION_MESSAGE);
-			}
-			else if (dataFim.length() == 0) {
-				showMessageDialog(gui, "Forneca a Data Fim da Pesquisa.", "Atencao", INFORMATION_MESSAGE);
-			}
-			else if (dataFim.length() > 14 || dataFim.length() < 10) {
-				showMessageDialog(gui, "Forneca uma Data Fim Valida para a Pesquisa.", "Atencao", INFORMATION_MESSAGE);
-			}
+			if (dataInicio.length() == 0)
+				new DialogoErro(gui, "Erro", "Forneca a Data Inicio da Pesquisa.");
+			else if (dataInicio.length() > 14 || dataInicio.length() < 10) 
+				new DialogoErro(gui, "Erro", "Forneca uma Data Inicio Valida para a Pesquisa.");
+			else if (dataFim.length() == 0) 
+				new DialogoErro(gui, "Erro", "Forneca a Data Fim da Pesquisa.");
+			else if (dataFim.length() > 14 || dataFim.length() < 10) 
+				new DialogoErro(gui, "Erro", "Forneca uma Data Fim Valida para a Pesquisa.");
 			else {
 
 				int dataInicioAux = Integer.parseInt(dataInicio.substring(6,10) + dataInicio.substring(3,5) + dataInicio.substring(0,2));
@@ -95,34 +89,34 @@ public class TratadorEventosCadastroPesquisa implements ActionListener, MouseLis
 				int ano = Integer.parseInt(dataInicio.substring(6,10));
 
 				if (ano < 1995) {
-					showMessageDialog(gui, "O Ano Nao Pode Ser Menor Que 1995.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "O Ano Nao Pode Ser Menor Que 1995.");
 				}
 				else if (dataInicioAux > dataFimAux) {
-					showMessageDialog(gui, "A Data Fim Nao Pode Ser Anterior Que a Data Inicio.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "A Data Fim Nao Pode Ser Anterior Que a Data Inicio.");
 				}
 				else if (branco.length() == 0 || branco.length() >= 10) {
-					showMessageDialog(gui, "Forneca uma Quantidade Valida de Votos Brancos ou Nulos da Pesquisa.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca uma Quantidade Valida de Votos Brancos ou Nulos da Pesquisa.");
 				}
 				else if (indeciso.length() == 0  || indeciso.length() >= 10) {
-					showMessageDialog(gui, "Forneca uma Quantidade Valida de Eleitores Indecisos da Pesquisa.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca uma Quantidade Valida de Eleitores Indecisos da Pesquisa.");
 				}
 				else if (entrevistado.length() == 0 || entrevistado.length() >= 10) {
-					showMessageDialog(gui, "Forneca uma Quantidade Valida de Eleitores Entrevistados da Pesquisa.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca uma Quantidade Valida de Eleitores Entrevistados da Pesquisa.");
 				}
 				else if (Integer.parseInt(entrevistado) == 0) {
-					showMessageDialog(gui, "Forneca uma Quantidade Valida de Eleitores Entrevistados da Pesquisa.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca uma Quantidade Valida de Eleitores Entrevistados da Pesquisa.");
 				}
 				else if (municipio.length() == 0 || municipio.length() >= 10) {
-					showMessageDialog(gui, "Forneca uma Quantidade Valida de Municipios em Que a Pesquisa Foi Realizada.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca uma Quantidade Valida de Municipios em Que a Pesquisa Foi Realizada.");
 				}
 				else if (Integer.parseInt(municipio) == 0) {
-					showMessageDialog(gui, "Forneca uma Quantidade Valida de Municipios em Que a Pesquisa Foi Realizada.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca uma Quantidade Valida de Municipios em Que a Pesquisa Foi Realizada.");
 				}
 				else if (cargo.length() == 0) {
-					showMessageDialog(gui, "Forneca o Cargo da Pesquisa.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Forneca o Cargo da Pesquisa.");
 				}
 				else if (gui.getTabelaCandidato().getRowCount() == 0) {
-					showMessageDialog(gui, "Selecione um Candidato Para a Pesquisa.", "Atencao", INFORMATION_MESSAGE);
+					new DialogoErro(gui, "Erro", "Selecione um Candidato Para a Pesquisa.");
 				}
 				else {
 
@@ -140,14 +134,14 @@ public class TratadorEventosCadastroPesquisa implements ActionListener, MouseLis
 						soma += Integer.parseInt(modeloTabela.getValueAt(x, 2).toString());
 
 					if (soma != Integer.parseInt(entrevistado) )
-						showMessageDialog(gui, "A Quantidade de Entrevistados Nao Bate Com a Soma Dos Votos.", "Erro", ERROR_MESSAGE);
+						new DialogoErro(gui, "Erro", "A Quantidade de Entrevistados Nao Bate Com a Soma Dos Votos.");
 					else {
 						try {
 							dataBasePesquisa.iniciaConexao();
 							int verifica = dataBasePesquisa.verificaPesquisaDataInicio(cargo, dataInicio);
 							verifica += dataBasePesquisa.verificaPesquisaDataInicio(cargo, dataInicio);
 							if (verifica != 0){
-								showMessageDialog(gui, "Ja Existe Uma Pesquisa Cadastrada Nesse Periodo", "Atencao", INFORMATION_MESSAGE);
+								new DialogoErro(gui, "Erro", "Ja Existe Uma Pesquisa Cadastrada Nesse Periodo");
 								dataBasePesquisa.fechaConexao();
 							}
 							else {
@@ -160,11 +154,11 @@ public class TratadorEventosCadastroPesquisa implements ActionListener, MouseLis
 									dataBasePesquisaCandidatos.adicionarPesquisaCandidatos(numero_pesquisa, modeloTabela.getValueAt(x, 1).toString(), Integer.parseInt(modeloTabela.getValueAt(x, 2).toString()));
 
 								dataBasePesquisaCandidatos.fechaConexao();
-								showMessageDialog(gui, "Pesquisa Adicionada.","Sucesso",INFORMATION_MESSAGE);
+								new DialogoSucesso(gui, "Sucesso", "Pesquisa Adicionada.");
 								gui.dispose();
 							}
 						} catch (Exception e) {
-							showMessageDialog(gui, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+							new DialogoErro(gui, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 						}
 					}
 				}
@@ -201,7 +195,7 @@ public class TratadorEventosCadastroPesquisa implements ActionListener, MouseLis
 		String nome = gui.getTabelaCandidato().getValueAt(posicao, 1).toString();
 
 		// Exibe uma mensagem de confirmacao de exclusao do candidato.
-		int op = showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
+		int op = JOptionPane.showConfirmDialog(gui, "Gostaria de Excluir " + nome + "?");
 		if (op == 0) {
 			modeloTabela = ((DefaultTableModel)(gui.getTabelaCandidato().getModel()));
 			modeloTabela.removeRow(posicao);

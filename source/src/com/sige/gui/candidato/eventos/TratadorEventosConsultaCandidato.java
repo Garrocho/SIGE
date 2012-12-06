@@ -20,7 +20,6 @@ import com.sige.persistencia.BancoDadosCandidato;
  * classe <code>DialogoConsultarCandidato</code>.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  * 
  * @see DialogoConsultarCandidato
  */
