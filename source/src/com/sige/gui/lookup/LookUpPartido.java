@@ -13,7 +13,6 @@ import com.sige.gui.lookup.eventos.TratadorEventosLookUpPartido;
  * pesquisa um partido.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class LookUpPartido extends JDialog {
 

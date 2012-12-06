@@ -19,7 +19,6 @@ import com.sige.gui.ShadowBorder;
  * Esta classe extende um <code>JDialog</code> e cria uma interface grafica com as informacoes do software e equipe.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoSobre extends JDialog {
 	

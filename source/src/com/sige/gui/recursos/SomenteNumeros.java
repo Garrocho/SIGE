@@ -8,7 +8,6 @@ import javax.swing.text.PlainDocument;
  * Esta classe extende um <code>PlainDocument</code>. Ela aplica a um componente a insercao de apenas numeros.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class SomenteNumeros extends PlainDocument {  
 

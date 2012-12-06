@@ -7,7 +7,6 @@ import java.sql.SQLException;
  * Esta classe e responsavel pela insercao e atualizacao da tabela "votacao_candidatos".
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class BancoDadosVotacaoCandidatos extends BancoDados {
 

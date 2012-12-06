@@ -23,7 +23,6 @@ import com.sige.gui.votacao.eventos.TratadorEventosConsultaVotacao;
  * Esta classe extende um <code>JDialog</code> e e cria uma interface grafica que permite a consulta de votacao.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoConsultarVotacao extends JDialog {
 

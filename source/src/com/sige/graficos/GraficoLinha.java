@@ -30,6 +30,7 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import com.sige.gui.ShadowBorder;
 import com.sige.persistencia.BancoDadosPesquisa;
 import com.sige.persistencia.BancoDadosPesquisaCandidatos;
 
@@ -37,7 +38,6 @@ import com.sige.persistencia.BancoDadosPesquisaCandidatos;
  * Esta classe cria uma interface grafica com um grafico de linha.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class GraficoLinha extends JDialog {
 
@@ -62,6 +62,7 @@ public class GraficoLinha extends JDialog {
 
 		super();
 		setTitle("Pesquisa Eleitoral");
+		getRootPane().setBorder(new ShadowBorder());
 
 		dataBasePesquisaCandidato = new BancoDadosPesquisaCandidatos();
 		dataBasePesquisa = new BancoDadosPesquisa();

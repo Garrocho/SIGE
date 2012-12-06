@@ -13,7 +13,6 @@ import com.sige.gui.lookup.eventos.TratadorEventosLookUpCargo;
  * pesquisa um cargo.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class LookUpCargo extends JDialog {
 

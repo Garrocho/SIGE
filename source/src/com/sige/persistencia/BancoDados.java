@@ -5,7 +5,6 @@ import java.sql.*;
  * Esta classe e responsavel pela insercao e atualizacao do banco de dados.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class BancoDados {
 	private Connection conexao;

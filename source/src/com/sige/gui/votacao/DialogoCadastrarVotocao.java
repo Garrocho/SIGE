@@ -30,7 +30,6 @@ import com.sige.gui.votacao.eventos.TratadorEventosCadastrarVotacao;
  * Esta classe extende um <code>JDialog</code> e cria uma interface grafica que permite o usuario cadastrar uma votacao.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoCadastrarVotocao extends JDialog {
 	

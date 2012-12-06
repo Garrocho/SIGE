@@ -15,7 +15,6 @@ import com.sige.gui.recursos.TamanhoMaximo;
  * pesquisar um candidato filtrando pelo cargo.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class LookUpCandidato extends JDialog {
 

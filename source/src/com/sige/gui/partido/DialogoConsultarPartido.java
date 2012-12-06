@@ -24,7 +24,6 @@ import com.sige.gui.partido.eventos.TratadorEventosConsultaPartido;
  * excluir um partido.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoConsultarPartido extends JDialog {
 

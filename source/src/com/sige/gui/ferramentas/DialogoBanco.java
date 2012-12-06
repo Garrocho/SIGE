@@ -19,7 +19,6 @@ import com.sige.gui.ferramentas.eventos.TratadorEventosBancoDados;
  * Esta classe extende um <code>JDialog</code> e cria uma interface grafica para o dialogo banco de dados.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoBanco extends JDialog {
 

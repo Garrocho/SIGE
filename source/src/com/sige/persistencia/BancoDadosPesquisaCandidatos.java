@@ -6,7 +6,6 @@ import java.sql.*;
  * Esta classe e responsavel pela insercao e atualizacao da tabela "pesquisa_candidatos".
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class BancoDadosPesquisaCandidatos extends BancoDados {
 	private String SQL;

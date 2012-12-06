@@ -31,7 +31,6 @@ import com.sige.gui.recursos.SomenteNumeros;
  * excluir uma Pesquisa.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoCadastrarPesquisa extends JDialog {
 

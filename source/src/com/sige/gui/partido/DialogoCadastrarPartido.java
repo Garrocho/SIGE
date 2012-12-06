@@ -22,7 +22,6 @@ import com.sige.gui.recursos.TamanhoMaximo;
  * Esta classe extende um <code>JDialog</code> e cria uma interface grafica que permite o usuario cadastrar um partido.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoCadastrarPartido extends JDialog {
 

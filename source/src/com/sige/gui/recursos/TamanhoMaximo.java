@@ -8,7 +8,6 @@ import javax.swing.text.PlainDocument;
  * Esta classe extende um <code>PlainDocument</code>. Ela aplica a um componente a insercao com um numero maximo de caracteres.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class TamanhoMaximo extends PlainDocument {  
 	private static final long serialVersionUID = 1L;

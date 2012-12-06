@@ -6,7 +6,6 @@ import java.sql.*;
  * Esta classe e responsavel pela insercao e atualizacao da tabela "partido".
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class BancoDadosPartido extends BancoDados {
 	private String SQL;

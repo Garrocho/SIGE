@@ -14,7 +14,6 @@ import de.javasoft.plaf.synthetica.SyntheticaWhiteVisionLookAndFeel;
  * Esta e a classe principal do programa. O programa inicia aqui.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class sigeInit {
 

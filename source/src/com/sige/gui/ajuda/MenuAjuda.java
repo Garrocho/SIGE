@@ -16,7 +16,6 @@ import com.sige.gui.JanelaPrincipal;
  * Esta classe extende um <code>JMenu</code> e cria o menu ajuda.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class MenuAjuda extends JMenu {
 

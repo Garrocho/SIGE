@@ -1,13 +1,9 @@
 package com.sige.gui.pesquisa;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -18,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.sige.gui.ShadowBorder;
 import com.sige.gui.pesquisa.eventos.TratadorEventosConsultaPesquisaCandidatos;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.persistencia.BancoDadosPesquisa;
 
 /**
@@ -25,7 +22,6 @@ import com.sige.persistencia.BancoDadosPesquisa;
  * pesquisas cadastradas.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoConsultarPesquisa extends JDialog {
 
@@ -98,12 +94,9 @@ public class DialogoConsultarPesquisa extends JDialog {
 
 			// Fecha a conexao o banco de dados.
 			dataBasePesquisa.fechaConexao();
-		} catch (SQLException e) {
-			showMessageDialog(null, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
-		} catch (ClassNotFoundException e) {
-			showMessageDialog(null, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+		} catch (Exception e) {
+			new DialogoErro(null, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
-
 		// Define as propriedades do Dialogo.
 		pack();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icones/icone.png")));

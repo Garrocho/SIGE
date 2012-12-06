@@ -10,7 +10,6 @@ import java.nio.channels.FileChannel;
  * Esta classe disponibiliza varios metodos estaticos.
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class Recurso {
 

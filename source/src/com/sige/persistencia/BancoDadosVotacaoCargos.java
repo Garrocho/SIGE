@@ -6,7 +6,6 @@ import java.sql.*;
  * Esta classe e responsavel pela insercao e atualizacao da tabela "votacao_cargos".
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class BancoDadosVotacaoCargos extends BancoDados {
 	private String SQL;

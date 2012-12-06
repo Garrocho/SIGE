@@ -28,7 +28,6 @@ import com.sige.gui.recursos.TamanhoMaximo;
  * excluir um candidato.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoConsultarCandidato extends JDialog {
 

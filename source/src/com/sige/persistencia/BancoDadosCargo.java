@@ -6,7 +6,6 @@ import java.sql.*;
  * Esta classe e responsavel pela insercao e atualizacao da tabela "cargo".
  *  
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class BancoDadosCargo extends BancoDados {
 	private String SQL;

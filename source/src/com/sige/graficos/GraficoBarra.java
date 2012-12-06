@@ -1,8 +1,5 @@
 package com.sige.graficos;
 
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,6 +27,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import com.sige.gui.ShadowBorder;
+import com.sige.gui.recursos.DialogoErro;
 import com.sige.persistencia.BancoDadosVotacaoCandidatos;
 import com.sige.persistencia.BancoDadosVotacaoCargos;
 
@@ -37,7 +36,6 @@ import com.sige.persistencia.BancoDadosVotacaoCargos;
  * Esta classe cria uma interface grafica com um grafico de barra horizontal.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class GraficoBarra extends JDialog {
 	
@@ -61,6 +59,7 @@ public class GraficoBarra extends JDialog {
 		
 		super();
 		setTitle("Apuracao Eleitoral");
+		getRootPane().setBorder(new ShadowBorder());
 		
 		this.data = data;
 		this.cargo = cargo;
@@ -157,7 +156,7 @@ public class GraficoBarra extends JDialog {
 			dataBancoDadosVotacaoCargos.fechaConexao();
 			
 		} catch (Exception e) {
-			showMessageDialog(null, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(null, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
 		
 		// OBTENDO A REFERENCIA DOS NUMEROS DO EIXO.
@@ -216,7 +215,7 @@ public class GraficoBarra extends JDialog {
 			dataBancoDadosVotacaoCargos.fechaConexao();
 			
 		} catch (Exception e) {
-			showMessageDialog(null, "Informe o Seguinte Erro ao Analista: " + e.toString(), "Atencao", INFORMATION_MESSAGE);
+			new DialogoErro(null, "Erro", "Informe o Seguinte Erro ao Analista: " + e.toString());
 		}
 	}
 }

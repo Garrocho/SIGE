@@ -16,7 +16,6 @@ import com.sige.gui.JanelaPrincipal;
  * Esta classe extende um <code>JMenu</code> e e cria o menu Votacao.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class MenuVotacao extends JMenu {
 

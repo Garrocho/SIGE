@@ -16,7 +16,6 @@ import com.sige.gui.JanelaPrincipal;
  * Esta classe extende um <code>JMenu</code> e cria o menu Pesquisa.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class MenuPesquisa extends JMenu {
 

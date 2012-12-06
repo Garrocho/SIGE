@@ -26,7 +26,6 @@ import com.sige.gui.pesquisa.eventos.TratadorEventosRelatorioPesquisa;
  * periodo para gerar um grafico de linha com os dados das pesquisas.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class DialogoRelatorioPesquisa extends JDialog {
 

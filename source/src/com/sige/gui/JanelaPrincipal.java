@@ -27,7 +27,6 @@ import com.sige.gui.votacao.MenuVotacao;
  * sistema.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class JanelaPrincipal extends Janela {
 

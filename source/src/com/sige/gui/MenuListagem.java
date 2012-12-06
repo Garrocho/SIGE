@@ -18,7 +18,6 @@ import com.sige.gui.partido.DialogoConsultarPartido;
  * Esta classe extende um <code>JMenu</code> e cria o menu Candidato.
  * 
  * @author Charles Garrocho
- * @author Barbara Silveiro
  */
 public class MenuListagem extends JMenu {
 	
