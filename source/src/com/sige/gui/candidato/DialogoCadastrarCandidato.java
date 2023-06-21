@@ -65,6 +65,7 @@ public class DialogoCadastrarCandidato extends JDialog {
 		private static final int NUMERO_DE_LINHAS = 4;
 		private static final int TAMANHO_MAXIMO_NOME = 25;
 		private static final int TAMANHO_MAXIMO_DOCUMENTO = 30;
+		private static final int TAMANHO_CAMPO_CARGO = 21;
 
 
 		JPanel painelNorte = new JPanel(new GridLayout(NUMERO_DE_LINHAS,0));
@@ -82,7 +83,7 @@ public class DialogoCadastrarCandidato extends JDialog {
 		painelNorte.add(painelNome);
 
 		JPanel painelCargo = new JPanel();
-		cargoField = new JTextField(21);
+		cargoField = new JTextField(TAMANHO_CAMPO_CARGO);
 		cargoField.setEditable(false);
 		botaoPesquisaCargo = new JButton();
 		botaoPesquisaCargo.setIcon(new ImageIcon(getClass().getResource("/icones/pesquisar.png")));
