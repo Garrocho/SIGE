@@ -62,7 +62,8 @@ public class DialogoCadastrarCandidato extends JDialog {
 		NumeroAlterar = Integer.parseInt(numero);
 		cargoAlterar = cargo;
 
-		JPanel painelNorte = new JPanel(new GridLayout(4,0));
+		private static final int NUMERO_DE_LINHAS = 4;
+		JPanel painelNorte = new JPanel(new GridLayout(NUMERO_DE_LINHAS,0));
 
 		JPanel painelNome = new JPanel();
 		fieldNome = new JTextField(25);
@@ -116,7 +117,7 @@ public class DialogoCadastrarCandidato extends JDialog {
 
 		JPanel painelNumero = new JPanel();
 		fieldNumero = new JTextField(13);
-		fieldNumero.setToolTipText("Descreva Aqui o Numero de Eleição do Candidato.");
+		fieldNumero.setToolTipText("Descreva Aqui o Numero de Eleiï¿½ï¿½o do Candidato.");
 		fieldNumero.setDocument(new SomenteNumeros());
 		
 		botaoAbrirImagem  = new JButton("FOTO", new ImageIcon(getClass().getResource("/icones/abrir.png")));
@@ -244,7 +245,7 @@ public class DialogoCadastrarCandidato extends JDialog {
 	 *        de dialogo.
 	 *        
 	 * @return <code>String</code> com o nome do arquivo a ser aberto. 
-	 *         Se o usuário cancelar a operacao (clicar no botao "Cancelar") sera
+	 *         Se o usuï¿½rio cancelar a operacao (clicar no botao "Cancelar") sera
 	 *         retornado <code>null</code>.
 	 *         
 	 * @see java.awt.Component
