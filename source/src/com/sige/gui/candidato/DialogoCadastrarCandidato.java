@@ -65,8 +65,10 @@ public class DialogoCadastrarCandidato extends JDialog {
 		private static final int NUMERO_DE_LINHAS = 4;
 		JPanel painelNorte = new JPanel(new GridLayout(NUMERO_DE_LINHAS,0));
 
+		private static final int TAMANHO_MAXIMO_NOME = 25;
+
 		JPanel painelNome = new JPanel();
-		fieldNome = new JTextField(25);
+		fieldNome = new JTextField(TAMANHO_MAXIMO_NOME);
 		fieldNome.setToolTipText("Descreva Aqui o Nome Completo do Candidato.");
 		fieldNome.setDocument(new TamanhoMaximo(30));
 		painelNome.add(new JLabel("Nome   "));
