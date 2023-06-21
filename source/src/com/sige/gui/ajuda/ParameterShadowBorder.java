@@ -2,7 +2,7 @@ package com.sige.gui.ajuda;
 
 public class ParameterShadowBorder {
     private Component component;
-    private Graphics exp;
+    private Graphics g;
     private int j;
     private int k;
     private int l; 
