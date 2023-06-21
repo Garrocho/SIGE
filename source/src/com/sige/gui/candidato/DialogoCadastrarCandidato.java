@@ -61,16 +61,20 @@ public class DialogoCadastrarCandidato extends JDialog {
 		TratadorEventosCadastroCandidato tratadorEventos = new TratadorEventosCadastroCandidato(this);
 		NumeroAlterar = Integer.parseInt(numero);
 		cargoAlterar = cargo;
-
+		
 		private static final int NUMERO_DE_LINHAS = 4;
+		private static final int TAMANHO_MAXIMO_NOME = 25;
+		private static final int TAMANHO_MAXIMO_DOCUMENTO = 30;
+
+
 		JPanel painelNorte = new JPanel(new GridLayout(NUMERO_DE_LINHAS,0));
 
-		private static final int TAMANHO_MAXIMO_NOME = 25;
+		
 
 		JPanel painelNome = new JPanel();
 		fieldNome = new JTextField(TAMANHO_MAXIMO_NOME);
 		fieldNome.setToolTipText("Descreva Aqui o Nome Completo do Candidato.");
-		fieldNome.setDocument(new TamanhoMaximo(30));
+		fieldNome.setDocument(new TamanhoMaximo(TAMANHO_MAXIMO_DOCUMENTO);
 		painelNome.add(new JLabel("Nome   "));
 		painelNome.add(fieldNome);
 
