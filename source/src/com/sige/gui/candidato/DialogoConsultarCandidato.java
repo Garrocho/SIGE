@@ -39,7 +39,7 @@ public class DialogoConsultarCandidato extends JDialog {
 	/**
 	 * Este e o construtor. Ele constroi a interface grafica do dialogo consultar candidato. 
 	 * 
-	 * @param janelaPrincipal um <code>JanelaPrincipal</code> com a referência da janela pai.
+	 * @param janelaPrincipal um <code>JanelaPrincipal</code> com a referï¿½ncia da janela pai.
 	 */
 	public DialogoConsultarCandidato(JanelaPrincipal janelaPrincipal) {
 
@@ -92,12 +92,21 @@ public class DialogoConsultarCandidato extends JDialog {
 
 		tabelaCandidatos = new JTable(new DefaultTableModel(dadosTabela, colunasTabela)){
 			private static final long serialVersionUID = 5727320816550514929L;
-			public boolean isCellEditable(int rowIndex, int colIndex) {
-				if (colIndex == getColumn("Numero").getModelIndex() || colIndex == getColumn("Nome").getModelIndex() 
-						|| colIndex == getColumn("Partido").getModelIndex() || colIndex == getColumn("Cargo").getModelIndex())
-					return false; // Evita a edicao das celulas.
-				else
-					return true;
+			TableColumn numeroColumn = getColumn("Numero");
+			TableColumn nomeColumn = getColumn("Nome");
+			TableColumn partidoColumn = getColumn("Partido");
+			TableColumn cargoColumn = getColumn("Cargo");
+
+			boolean isColumnValid = (colIndex == numeroColumn.getModelIndex()) ||
+									(colIndex == nomeColumn.getModelIndex()) ||
+									(colIndex == partidoColumn.getModelIndex()) ||
+									(colIndex == cargoColumn.getModelIndex());
+
+			if (isColumnValid) {
+				return false;
+			}
+			else{
+				return true;
 			}
 		};
 		tabelaCandidatos.setPreferredScrollableViewportSize(new Dimension(420, 230));
