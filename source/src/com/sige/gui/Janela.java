@@ -45,29 +45,28 @@ public abstract class Janela extends JFrame {
 	 * @return <code>String</code> com o endere�o do arquivo selecionado, caso nenhum arquivo seja selecionado, � retornado <code>null</code>
 	 * @see  JFileChooser
 	 */
-	public static String janelaAbrirArquivo(Component componentePai, String titulo, String diretorioCorrente, boolean opcaoTodosArquivos, String nomeFiltro, String... extensao){
-		JFileChooser janelaAbrir = new JFileChooser(titulo);
+	public static String janelaAbrirArquivo(OpcoesSelecaoArquivo opcoes) {
+    JFileChooser janelaAbrir = new JFileChooser(opcoes.getTitulo());
 
-		janelaAbrir.setAcceptAllFileFilterUsed(false);
-		janelaAbrir.setDialogType(JFileChooser.OPEN_DIALOG);
-		janelaAbrir.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		janelaAbrir.setDialogTitle(titulo);
-		janelaAbrir.setFileFilter(new FileNameExtensionFilter(nomeFiltro, extensao));
-		janelaAbrir.setAcceptAllFileFilterUsed(opcaoTodosArquivos);
+    janelaAbrir.setAcceptAllFileFilterUsed(false);
+    janelaAbrir.setDialogType(JFileChooser.OPEN_DIALOG);
+    janelaAbrir.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    janelaAbrir.setDialogTitle(opcoes.getTitulo());
+    janelaAbrir.setFileFilter(new FileNameExtensionFilter(opcoes.getNomeFiltro(), opcoes.getExtensao()));
+    janelaAbrir.setAcceptAllFileFilterUsed(opcoes.isOpcaoTodosArquivos());
 
-		if(diretorioCorrente != null){
-			if (diretorioCorrente.isEmpty()){
-				janelaAbrir.setCurrentDirectory(new File("."));
-			}
-			else{
-				janelaAbrir.setCurrentDirectory(new File(diretorioCorrente));
-			}
-		}
+    if (opcoes.getDiretorioCorrente() != null) {
+        if (opcoes.getDiretorioCorrente().isEmpty()) {
+            janelaAbrir.setCurrentDirectory(new File("."));
+        } else {
+            janelaAbrir.setCurrentDirectory(new File(opcoes.getDiretorioCorrente()));
+        }
+    }
 
-		janelaAbrir.showOpenDialog(componentePai);
+    janelaAbrir.showOpenDialog(opcoes.getComponentePai());
 
-		return janelaAbrir.getSelectedFile() != null ? janelaAbrir.getSelectedFile().getPath() : null;
-	}
+    return janelaAbrir.getSelectedFile() != null ? janelaAbrir.getSelectedFile().getPath() : null;
+}
 
 	/** 
 	 * Exibe uma caixa de dialogo <code>javax.swing.JFileChooser</code> para 

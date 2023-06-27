@@ -62,143 +62,19 @@ public class DialogoCadastrarCandidato extends JDialog {
 		NumeroAlterar = Integer.parseInt(numero);
 		cargoAlterar = cargo;
 
-		JPanel painelNorte = new JPanel(new GridLayout(4,0));
+		final int NUMERO_DE_LINHAS = 4;
+		final int TAMANHO_MAXIMO_NOME = 25;
+		final int TAMANHO_MAXIMO_DOCUMENTO = 30;
+		final int TAMANHO_CAMPO_CARGO = 21;
 
-		JPanel painelNome = new JPanel();
-		fieldNome = new JTextField(25);
-		fieldNome.setToolTipText("Descreva Aqui o Nome Completo do Candidato.");
-		fieldNome.setDocument(new TamanhoMaximo(30));
-		painelNome.add(new JLabel("Nome   "));
-		painelNome.add(fieldNome);
+		JPanel painelNorte = criarPainelNorte(numero, nome, partido, cargo, tratadorEventos, NUMERO_DE_LINHAS, TAMANHO_MAXIMO_NOME,
+				TAMANHO_MAXIMO_DOCUMENTO, TAMANHO_CAMPO_CARGO);
 
-		// Adiciona o painelNome e todo seu conteudo ao painelNorte.
-		painelNorte.add(painelNome);
+		JPanel painelCentro = criarPainelCentro(caminhoFoto);
 
-		JPanel painelCargo = new JPanel();
-		cargoField = new JTextField(21);
-		cargoField.setEditable(false);
-		botaoPesquisaCargo = new JButton();
-		botaoPesquisaCargo.setIcon(new ImageIcon(getClass().getResource("/icones/pesquisar.png")));
-		botaoPesquisaCargo.setPreferredSize(new Dimension(30,30));
-		botaoPesquisaCargo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		botaoPesquisaCargo.setToolTipText("Clique aqui para selecionar um cargo.");
-		painelCargo.add(new JLabel(" Cargo   "));
-		painelCargo.add(cargoField);
-		painelCargo.add(botaoPesquisaCargo);
-		botaoPesquisaCargo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new LookUpCargo(getThis(),getThis().getCargoField());
-			}
-		});
+		JPanel painelBotoes = criarPainelBotoes(tratadorEventos);
 
-		// Adiciona o painelCargo e todo seu conteudo ao painelNorte.
-		painelNorte.add(painelCargo);		
-
-		JPanel painelPartido = new JPanel();
-		partidoField = new JTextField(21);
-		partidoField.setEditable(false);
-		botaoPesquisaPartido = new JButton();
-		botaoPesquisaPartido.setIcon(new ImageIcon(getClass().getResource("/icones/pesquisar.png")));
-		botaoPesquisaPartido.setPreferredSize(new Dimension(30,30));
-		botaoPesquisaPartido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		botaoPesquisaPartido.setToolTipText("Clique aqui para selecionar um cargo.");
-		painelPartido.add(new JLabel(" Partido "));
-		painelPartido.add(partidoField);
-		painelPartido.add(botaoPesquisaPartido);
-		botaoPesquisaPartido.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new LookUpPartido(getThis(),getThis().getPartidoField());
-			}
-		});
-
-		// Adiciona o painelPartido e todo seu conteudo ao painelNorte.
-		painelNorte.add(painelPartido);
-
-		JPanel painelNumero = new JPanel();
-		fieldNumero = new JTextField(13);
-		fieldNumero.setToolTipText("Descreva Aqui o Numero de Eleição do Candidato.");
-		fieldNumero.setDocument(new SomenteNumeros());
-		
-		botaoAbrirImagem  = new JButton("FOTO", new ImageIcon(getClass().getResource("/icones/abrir.png")));
-		botaoAbrirImagem.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-		botaoAbrirImagem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		botaoAbrirImagem.setToolTipText("Selecione Aqui a Foto do Candidato.");
-		botaoAbrirImagem.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent arg0) {
-				String caminhoFoto = dialogoAbrirArquivo(getThis(),"Selecionar Foto");
-				if (caminhoFoto != null) {
-					addFotoCandidato(caminhoFoto);
-				}
-			}
-		});
-		
-		painelNumero.add(new JLabel("Numero"));
-		painelNumero.add(fieldNumero);
-		painelNumero.add(botaoAbrirImagem);
-		painelNorte.add(painelNumero);
-
-		// Adiciona o painelNorte no centro do DialogoCadastrarCandidato.
-		add(painelNorte, BorderLayout.NORTH);
-
-		JPanel painelCentro = new JPanel();
-		
-		JPanel painelBotoes = new JPanel();
-		botaoGravar   = new JButton("GRAVAR", new ImageIcon(getClass().getResource("/icones/gravar.png")));
-		botaoGravar.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-		botaoGravar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		botaoGravar.addActionListener(tratadorEventos);
-		
-		painelBotoes.add(botaoGravar);
-
-		// Verifica se sera um cadastro ou alteracao de candidato.
-		if (NumeroAlterar == -1) {
-
-			// Caso seja um cadastro adiciona a imagem, uma imagem default de cadastro e seta o titulo para Cadastro.
-			caminhoImagem = "/icones/cadastro.png";
-			setTitle("Cadastro de Candidato");
-			
-			botaoCancelar = new JButton("CANCELAR", new ImageIcon(getClass().getResource("/icones/cancelar.png")));
-			botaoCancelar.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-			botaoCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-			botaoCancelar.addActionListener(tratadorEventos);
-			
-			painelBotoes.add(botaoCancelar);
-		}
-		else {
-
-			// Caso seja uma alteracao, adiciona todas as informacoes do candidato aos objetos e seta o titulo para alteracao.
-			setTitle("Alteracao de Candidato");
-			caminhoImagem = caminhoFoto;
-			fieldNumero.setText(numero);
-			fieldNome.setText(nome);
-			cargoField.setText(cargo);
-			partidoField.setText(partido);
-			
-			botaoExcluir = new JButton("EXCLUIR", new ImageIcon(getClass().getResource("/icones/excluir.png")));
-			botaoExcluir.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-			botaoExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-			botaoExcluir.addActionListener(tratadorEventos);
-			
-			painelBotoes.add(botaoExcluir);
-		}
-		
-		// Adiciona o painelBotoes ao sul do DialogoCadastrarCandidato.
-		add(painelBotoes, BorderLayout.SOUTH);
-
-		Image img;
-		if (caminhoImagem.equalsIgnoreCase("/icones/cadastro.png"))
-			img = Toolkit.getDefaultToolkit().getImage(getClass().getResource(caminhoImagem));
-		else
-			img = Toolkit.getDefaultToolkit().getImage(caminhoImagem);
-		Image menor   = img.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
-		FotoCandidato = new ImageIcon(menor);
-		JLabel labelFoto = new JLabel(FotoCandidato);
-
-		// Adiciona o labelFoto ao painelCentro.
-		painelCentro.add(labelFoto);
-
-		// Adiciona o painelCentro no centro do DialogoCadastrarCandidato.
-		add(painelCentro, BorderLayout.CENTER);
+		configurarDialogo(painelNorte, painelCentro, painelBotoes);
 
 		pack();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icones/icone.png")));
@@ -208,6 +84,154 @@ public class DialogoCadastrarCandidato extends JDialog {
 		setResizable(false);
 		setVisible(true);
 	}
+	
+	public JPanel criarPainelNorte(PainelNorteConfiguracao configuracao) {
+		JPanel painelNorte = new JPanel(new GridLayout(configuracao.getNumLinhas(), 0));
+
+		JPanel painelNome = criarPainelCampo("Nome", configuracao.getNome(), configuracao.getTamMaxNome());
+		painelNorte.add(painelNome);
+
+		JPanel painelCargo = criarPainelCampoCargo(configuracao.getCargo(), configuracao.getTamCampoCargo(),
+				configuracao.getTratadorEventos());
+		painelNorte.add(painelCargo);
+
+		JPanel painelPartido = criarPainelCampoPartido(configuracao.getPartido(), configuracao.getTratadorEventos());
+		painelNorte.add(painelPartido);
+
+		JPanel painelNumero = criarPainelCampoNumero(configuracao.getNumero());
+		painelNorte.add(painelNumero);
+
+		return painelNorte;
+	}
+
+	private JPanel criarPainelCampo(String labelCampo, String valorInicial, int tamanhoMaximo) {
+		JPanel painelCampo = new JPanel();
+		JTextField textField = new JTextField(tamanhoMaximo);
+		textField.setToolTipText("Descreva aqui o " + labelCampo + " Completo do Candidato.");
+		textField.setDocument(new TamanhoMaximo(tamanhoMaximo));
+		textField.setText(valorInicial);
+		painelCampo.add(new JLabel(labelCampo + "   "));
+		painelCampo.add(textField);
+		return painelCampo;
+	}
+
+	private JPanel criarPainelCampoCargo(String cargo, int tamanhoCampoCargo,
+										TratadorEventosCadastroCandidato tratadorEventos) {
+		JPanel painelCargo = new JPanel();
+		cargoField = new JTextField(tamanhoCampoCargo);
+		cargoField.setEditable(false);
+		botaoPesquisaCargo = criarBotaoPesquisa("/icones/pesquisar.png", "Clique aqui para selecionar um cargo", tratadorEventos);
+		painelCargo.add(new JLabel(" Cargo   "));
+		painelCargo.add(cargoField);
+		painelCargo.add(botaoPesquisaCargo);
+		return painelCargo;
+	}
+
+	private JPanel criarPainelCampoPartido(String partido, TratadorEventosCadastroCandidato tratadorEventos) {
+		JPanel painelPartido = new JPanel();
+		partidoField = new JTextField(21);
+		partidoField.setEditable(false);
+		botaoPesquisaPartido = criarBotaoPesquisa("/icones/pesquisar.png", "Clique aqui para selecionar um partido", tratadorEventos);
+		painelPartido.add(new JLabel(" Partido "));
+		painelPartido.add(partidoField);
+		painelPartido.add(botaoPesquisaPartido);
+		return painelPartido;
+	}
+
+	private JPanel criarPainelCampoNumero(String numero) {
+		JPanel painelNumero = new JPanel();
+		fieldNumero = new JTextField(13);
+		fieldNumero.setToolTipText("Descreva aqui o NÃºmero de EleiÃ§Ã£o do Candidato.");
+		fieldNumero.setDocument(new SomenteNumeros());
+		fieldNumero.setText(numero);
+		botaoAbrirImagem = criarBotaoAbrirImagem();
+		painelNumero.add(new JLabel("NÃºmero"));
+		painelNumero.add(fieldNumero);
+		painelNumero.add(botaoAbrirImagem);
+		return painelNumero;
+	}
+
+	private JButton criarBotaoPesquisa(String iconePath, String tooltip, TratadorEventosCadastroCandidato tratadorEventos) {
+		JButton botaoPesquisa = new JButton();
+		botaoPesquisa.setIcon(new ImageIcon(getClass().getResource(iconePath)));
+		botaoPesquisa.setPreferredSize(new Dimension(30, 30));
+		botaoPesquisa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		botaoPesquisa.setToolTipText(tooltip);
+		botaoPesquisa.addActionListener(tratadorEventos);
+		return botaoPesquisa;
+	}
+
+	private JButton criarBotaoAbrirImagem() {
+		JButton botaoAbrirImagem = new JButton("FOTO", new ImageIcon(getClass().getResource("/icones/abrir.png")));
+		botaoAbrirImagem.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+		botaoAbrirImagem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		botaoAbrirImagem.setToolTipText("Selecione aqui a foto do candidato.");
+		botaoAbrirImagem.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				String caminhoFoto = dialogoAbrirArquivo(getThis(), "Selecionar Foto");
+				if (caminhoFoto != null) {
+					addFotoCandidato(caminhoFoto);
+				}
+			}
+		});
+		return botaoAbrirImagem;
+	}
+
+	private JPanel criarPainelCentro(String caminhoFoto) {
+		JPanel painelCentro = new JPanel();
+		Image img;
+		if (caminhoFoto.equalsIgnoreCase("/icones/cadastro.png"))
+			img = Toolkit.getDefaultToolkit().getImage(getClass().getResource(caminhoFoto));
+		else
+		
+			img = Toolkit.getDefaultToolkit().getImage(caminhoFoto);
+		Image menor = img.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+		FotoCandidato = new ImageIcon(menor);
+		JLabel labelFoto = new JLabel(FotoCandidato);
+		painelCentro.add(labelFoto);
+		return painelCentro;
+	}
+
+	private JPanel criarPainelBotoes(TratadorEventosCadastroCandidato tratadorEventos) {
+		JPanel painelBotoes = new JPanel();
+		botaoGravar = criarBotao("GRAVAR", "/icones/gravar.png", tratadorEventos);
+		painelBotoes.add(botaoGravar);
+		botaoCancelar = criarBotao("CANCELAR", "/icones/cancelar.png", tratadorEventos);
+		painelBotoes.add(botaoCancelar);
+		return painelBotoes;
+	}
+
+	private JButton criarBotao(String texto, String iconePath, TratadorEventosCadastroCandidato tratadorEventos) {
+		JButton botao = new JButton(texto, new ImageIcon(getClass().getResource(iconePath)));
+		botao.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+		botao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		botao.addActionListener(tratadorEventos);
+		return botao;
+	}
+
+	private void configurarDialogo(JPanel painelNorte, JPanel painelCentro, JPanel painelBotoes) {
+		setLayout(new BorderLayout());
+		add(painelNorte, BorderLayout.NORTH);
+		add(painelCentro, BorderLayout.CENTER);
+		add(painelBotoes, BorderLayout.SOUTH);
+	}
+
+	private String dialogoAbrirArquivo(Component parent, String titulo) {
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagens", "jpg", "jpeg", "png", "gif");
+		fileChooser.setFileFilter(filtro);
+		int returnVal = fileChooser.showOpenDialog(parent);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File arquivo = fileChooser.getSelectedFile();
+			return arquivo.getPath();
+		}
+		return null;
+	}
+
+	private DialogoCadastrarCandidato getThis() {
+		return this;
+	}
+
 	
 	/**
 	 * Este metodo retorna a referencia da propria classe.
@@ -244,7 +268,7 @@ public class DialogoCadastrarCandidato extends JDialog {
 	 *        de dialogo.
 	 *        
 	 * @return <code>String</code> com o nome do arquivo a ser aberto. 
-	 *         Se o usuário cancelar a operacao (clicar no botao "Cancelar") sera
+	 *         Se o usuï¿½rio cancelar a operacao (clicar no botao "Cancelar") sera
 	 *         retornado <code>null</code>.
 	 *         
 	 * @see java.awt.Component
