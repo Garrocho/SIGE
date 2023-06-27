@@ -70,10 +70,15 @@ public class DialogoConsultarPartido extends JDialog {
 		tabelaPartidos = new JTable(new DefaultTableModel(dadosTabela, colunasTabela)){
 			private static final long serialVersionUID = 5727320816550514929L;
 			public boolean isCellEditable(int rowIndex, int colIndex) {
-				if (colIndex == getColumn("Numero").getModelIndex() || colIndex == getColumn("Nome").getModelIndex() || colIndex == getColumn("Sigla").getModelIndex())
-					return false; // Evita a edicao das celulas.
-				else
-					return true;
+				int numeroColumnIndex = getColumn("Numero").getModelIndex();
+				int nomeColumnIndex = getColumn("Nome").getModelIndex();
+				int siglaColumnIndex = getColumn("Sigla").getModelIndex();
+
+				boolean isEditable = (colIndex == numeroColumnIndex) || 
+									(colIndex == nomeColumnIndex) || 
+									(colIndex == siglaColumnIndex);
+
+				return !isEditable;
 			}
 		};
 		tabelaPartidos.setPreferredScrollableViewportSize(new Dimension(390, 250));
