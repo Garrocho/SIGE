@@ -84,22 +84,21 @@ public class DialogoCadastrarCandidato extends JDialog {
 		setResizable(false);
 		setVisible(true);
 	}
+	
+	public JPanel criarPainelNorte(PainelNorteConfiguracao configuracao) {
+		JPanel painelNorte = new JPanel(new GridLayout(configuracao.getNumLinhas(), 0));
 
-	private JPanel criarPainelNorte(String numero, String nome, String partido, String cargo,
-								TratadorEventosCadastroCandidato tratadorEventos,
-								int numLinhas, int tamMaxNome, int tamMaxDocumento, int tamCampoCargo) {
-		JPanel painelNorte = new JPanel(new GridLayout(numLinhas, 0));
-
-		JPanel painelNome = criarPainelCampo("Nome", nome, tamMaxNome);
+		JPanel painelNome = criarPainelCampo("Nome", configuracao.getNome(), configuracao.getTamMaxNome());
 		painelNorte.add(painelNome);
 
-		JPanel painelCargo = criarPainelCampoCargo(cargo, tamCampoCargo, tratadorEventos);
+		JPanel painelCargo = criarPainelCampoCargo(configuracao.getCargo(), configuracao.getTamCampoCargo(),
+				configuracao.getTratadorEventos());
 		painelNorte.add(painelCargo);
 
-		JPanel painelPartido = criarPainelCampoPartido(partido, tratadorEventos);
+		JPanel painelPartido = criarPainelCampoPartido(configuracao.getPartido(), configuracao.getTratadorEventos());
 		painelNorte.add(painelPartido);
 
-		JPanel painelNumero = criarPainelCampoNumero(numero);
+		JPanel painelNumero = criarPainelCampoNumero(configuracao.getNumero());
 		painelNorte.add(painelNumero);
 
 		return painelNorte;
