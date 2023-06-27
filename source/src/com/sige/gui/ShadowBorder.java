@@ -32,6 +32,8 @@ public class ShadowBorder extends AbstractBorder {
 
     @Override
     public void paintBorder(ParameterShadowBorder parameterShadowBorder){
-        parameterShadowBorder.setGraphics(setColor(Color.RED));
+        Graphics g = parameterShadowBorder.getGraphics();
+        g.setColor(Color.RED);
+        parameterShadowBorder.setGraphics(g)
     }
 }
