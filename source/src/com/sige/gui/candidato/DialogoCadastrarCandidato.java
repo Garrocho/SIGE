@@ -184,6 +184,7 @@ public class DialogoCadastrarCandidato extends JDialog {
 		if (caminhoFoto.equalsIgnoreCase("/icones/cadastro.png"))
 			img = Toolkit.getDefaultToolkit().getImage(getClass().getResource(caminhoFoto));
 		else
+		
 			img = Toolkit.getDefaultToolkit().getImage(caminhoFoto);
 		Image menor = img.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
 		FotoCandidato = new ImageIcon(menor);
